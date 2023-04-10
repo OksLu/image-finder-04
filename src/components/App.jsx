@@ -68,6 +68,7 @@ export const App = () => {
     <div>
       {loading && <Loader />}
       <Searchbar onSubmit={onSubmit} />
+      {errorMsg && <p>Something wrong! {errorMsg}</p>}
       <ImagesGallery gallery={gallery} onImageClick={onImageClick} />
 
       {openModal && <Modal hideModal={hideModal} currentImg={currentImg} />}
