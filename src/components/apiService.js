@@ -9,12 +9,4 @@ export async function fetchPics(searchQuery, page = 1) {
 
   const response = await axios.get(URL);
   return response.data;
-  //   .hits.map(hit => {
-  //   return {
-  //     id: hit.id,
-  //     smallImg: hit.webformatURL,
-  //     largeImg: hit.largeImageURL,
-  //     tags: hit.tags,
-  //   };
-  // });
 }
