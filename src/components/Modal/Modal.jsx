@@ -4,15 +4,17 @@ import css from './Modal.module.css';
 import { GrClose } from 'react-icons/gr';
 
 export const Modal = ({ hideModal, currentImg }) => {
-  const handlePressEsc = e => {
-    if (e.code === 'Escape') {
-      hideModal();
-    }
-  };
-
   useEffect(() => {
+    const handlePressEsc = e => {
+      if (e.code === 'Escape') {
+        hideModal();
+      }
+    };
     window.addEventListener('keydown', handlePressEsc);
-  }, []);
+    return () => {
+      window.removeEventListener('keydown', handlePressEsc);
+    };
+  }, [hideModal]);
 
   return (
     <div className={css.overlay} onClick={hideModal}>

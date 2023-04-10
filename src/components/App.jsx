@@ -26,31 +26,30 @@ export const App = () => {
     setPage(prevState => prevState + 1);
   };
 
-  const loadImages = async () => {
-    if (page === 0) {
-      return;
-    }
-    try {
-      setLoading(true);
-      const response = await fetchPics(query, page);
-      const images = response.hits.map(hit => {
-        return {
-          id: hit.id,
-          smallImg: hit.webformatURL,
-          largeImg: hit.largeImageURL,
-          tags: hit.tags,
-        };
-      });
-      setGallery(prevState => [...prevState, ...images]);
-      setTotal(response.totalHits);
-    } catch (error) {
-      setErrorMsg('Error while loading data. Try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const loadImages = async () => {
+      if (page === 0) {
+        return;
+      }
+      try {
+        setLoading(true);
+        const response = await fetchPics(query, page);
+        const images = response.hits.map(hit => {
+          return {
+            id: hit.id,
+            smallImg: hit.webformatURL,
+            largeImg: hit.largeImageURL,
+            tags: hit.tags,
+          };
+        });
+        setGallery(prevState => [...prevState, ...images]);
+        setTotal(response.totalHits);
+      } catch (error) {
+        setErrorMsg('Error while loading data. Try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
     loadImages();
   }, [query, page]);
 
